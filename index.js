@@ -14,9 +14,20 @@ app.get('/', (req,res)=>{
         console.log(salt)
         bcrypt.hash('password', salt, (err, hash)=>{
             console.log(hash)
+        
+        //Decrypt the password.
+        bcrypt.compare('password', hash, function(err, result) {
+            if (result == true){
+            console.log('Working fine')
+            console.log(hash);
+            }
+            else{
+                console.log('something went wrong')
+            }
+        });
         })
     });
+    
 });
-
 
 app.listen(3000);
