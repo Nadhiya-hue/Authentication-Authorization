@@ -16,4 +16,10 @@ app.get('/index', (req,res)=>{
     res.send('Working Index Copy Ok!');
 });
 
+//Verify JWT token
+app.get('/verify', (req,res)=>{
+    let match = jwt.verify(req.cookies.token,'secret');
+    console.log(match)
+    res.send('ok')
+})
 app.listen(3000);
