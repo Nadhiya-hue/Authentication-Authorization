@@ -5,13 +5,16 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 //Cookie setting.
-app.get('/', async (req,res)=>{
+app.get('/', (req,res)=>{
     res.cookie('name','Nadhiya');
     res.send('Working');
     
-    //Salt generation.
-    const salt = await bcrypt.genSalt(10, (err, salt)=>{
-        console.log(salt);
+    //Salt generation & Encrypt the password using bcrypt.
+    bcrypt.genSalt(10, (err, salt)=>{
+        console.log(salt)
+        bcrypt.hash('password', salt, (err, hash)=>{
+            console.log(hash)
+        })
     });
 });
 
